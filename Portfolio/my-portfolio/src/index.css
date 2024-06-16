@@ -1,0 +1,123 @@
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* EndTailwind */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*  Transition dark bright button */
+
+.darkBtn {
+  width: 70px;
+  background-color: rgba(0, 0, 0, 0.738);
+  height: 40px;
+  padding: 6px 6px;
+  display: flex;
+  align-items: center;
+  border-radius: 22px;
+  /* border: 2px solid black; */
+  gap: 10px;
+}
+
+/*  */
+body {
+  background-color: white;
+  /* filter: blur(4px); */
+
+  padding: auto;
+  /* position: relative; */
+}
+
+.dark-mode {
+  background-color: #28293d;
+  color: rgb(247, 247, 247);
+}
+
+.dark-btn {
+  color: white;
+  background-color: #eeeeff;
+}
+/* .bright-btn {
+  color: black;
+} */
+/* .dark-skills {
+  background-color: #28293d;
+} */
+/*  */
+
+.active {
+  border-bottom: 2px solid #ffffff;
+  /* color: white; */
+}
+
+/* .aboutimage {
+  display: block;
+} */
+/* Responsive */
+
+@media screen and (max-width: 710px) {
+  #Education {
+    border-radius: 0;
+    padding: 0;
+    padding-top: 1rem;
+    font-size: 1rem;
+    width: 100%;
+    height: 80rem;
+  }
+
+  .About {
+    margin-top: 1rem;
+    height: fit-content;
+  }
+
+  .skills {
+    margin-top: 1rem;
+    height: 25rem;
+  }
+  .ctxt {
+    padding: 0;
+  }
+
+  .f-right {
+    margin: 0 1rem;
+  }
+}
+
+.colors {
+  background-color: #0b0c10;
+  background-color: #1f2833;
+  background-color: #c5c6c7;
+  background-color: #66cff1;
+  background-color: #45a29e;
+}
+
+/* .try
+{
+    opacity: 0;
+}
+.show
+{
+    opacity: 1;
+} */

@@ -1,0 +1,34 @@
+.slide-wrapper {
+  width: calc(180px * 22);
+  animation: scrollinfinite 30s linear infinite;
+  transition: 5s;
+  height: 200px;
+  align-items: center;
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+.skills-contianer {
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+.skills-contianer:hover {
+  transform: scale(1.1);
+}
+
+/* @media screen and (max-width: 640px) {
+  .skills {
+    margin-top: 7rem;
+  }
+} */
+
+@media screen and (max-width: 710px) {
+  .skills {
+    margin-top: 3rem;
+  }
+
+  .skill {
+    margin-top: 3rem;
+  }
+}

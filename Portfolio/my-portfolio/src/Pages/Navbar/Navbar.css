@@ -1,0 +1,141 @@
+.show-menu {
+  bottom: 0;
+}
+
+.navb {
+  width: 100%;
+  display: none;
+}
+
+.navR {
+  display: flex;
+  flex: 2;
+}
+
+.navL {
+  display: flex;
+  flex: 9;
+}
+
+.btn_toggle {
+  display: none;
+}
+
+.myImg {
+  width: 20rem;
+  height: 20rem;
+}
+
+nav {
+  padding: 0 4rem;
+}
+
+header {
+  /* position: sticky;
+  top: 0;
+  z-index: 100; */
+  /* Slate blue */
+  /* background-color: hsl(255, 64%, 59%); */
+  /* background: rgb(89, 98, 200); */
+  background: rgb(91, 74, 201);
+  /* background-color: rgb(13, 134, 254); */
+  color: white;
+  /* filter: blur(2px); */
+}
+
+.img1 {
+  position: absolute;
+  width: 27px;
+  height: 27px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 400ms ease-in-out;
+}
+
+.mover {
+  transform: translateX(32px);
+}
+
+@media screen and (max-width: 1000px) {
+  nav {
+    padding: 0px 10px;
+    gap: 4rem;
+  }
+
+  .btn_toggle {
+    display: block;
+  }
+  .navb {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    right: 0;
+    color: black;
+    top: 0;
+    background-color: rgba(139, 128, 128, 0.418);
+    left: 0;
+    transition: 0.3s;
+    transform: translateX(-100%);
+  }
+
+  .navb_activate {
+    transform: translateX(0%);
+  }
+
+  .nav_close {
+    display: flex;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    justify-content: end;
+    position: relative;
+    z-index: 11;
+  }
+  .navL {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-bottom-right-radius: 2rem;
+    border-top-right-radius: 2rem;
+    height: 90vh;
+    flex: 5;
+    width: 20rem;
+    box-shadow: 0 40px 60px -12px rgb(0 0 0 / 0.7);
+  }
+  .nav_list {
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 3rem auto;
+  }
+
+  .nav_item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid gray;
+    /* text-decoration: underline; */
+  }
+
+  .nav_link {
+    font-size: 1.5rem;
+    width: 100%;
+  }
+
+  .nav_link:hover {
+    border-bottom: 1px solid #0a1f30;
+  }
+
+  .navR {
+    flex: 5;
+    /* width: 100%; */
+    /* backdrop-filter: blur(20px); */
+    z-index: 100;
+    filter: blur(44px);
+  }
+
+  .nav_menu {
+    display: none;
+  }
+}
