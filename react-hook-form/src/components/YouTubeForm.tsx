@@ -1,4 +1,4 @@
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, FieldErrors } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { useEffect } from "react";
 type FormValues = {
@@ -33,7 +33,7 @@ const YouTubeForm = () => {
 
       return {
         username: "Aniket1074",
-        email: data.email,
+        email: "",
         channel: "",
         social: {
           facebook: "",
@@ -49,6 +49,7 @@ const YouTubeForm = () => {
         dob: new Date(),
       };
     },
+    mode: "onTouched",
   });
 
   const {
@@ -59,21 +60,36 @@ const YouTubeForm = () => {
     watch,
     getValues,
     setValue,
+    reset,
+    trigger,
   } = form;
 
-  const { errors, touchedFields, dirtyFields } = formState;
+  const {
+    errors,
+    touchedFields,
+    dirtyFields,
+    isDirty,
+    isValid,
+    isSubmitting,
+    isSubmitted,
+    isSubmitSuccessful,
+    submitCount,
+  } = formState;
 
   const { fields, append, remove } = useFieldArray({
     name: "phNumbers",
     control,
   });
+
+  console.log({ isSubmitting, isSubmitted, isSubmitSuccessful, submitCount });
+
   //   const { name, onBlur, onChange, ref } = register("username");
 
   const onSubmit = (data: FormValues) => {
     console.log("Form is submitted", data);
   };
 
-  console.log(touchedFields, dirtyFields);
+  console.log(touchedFields, dirtyFields, isDirty, isValid);
 
   //   useEffect(() => {
   //     const subscription = watch((value, { name, type }) =>
@@ -94,11 +110,15 @@ const YouTubeForm = () => {
     });
   };
 
+  const onError = (error: FieldErrors<FormValues>) => {
+    console.log(error);
+  };
+
   renderCount++;
   return (
     <div>
-      <h1>Render Component ({renderCount / 2})</h1>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <h2>Render Component ({renderCount / 2})</h2>
+      <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
         <div className="form-control">
           <label htmlFor="username">Username</label>
           <input
@@ -140,7 +160,18 @@ const YouTubeForm = () => {
                     "This domain is not supported"
                   );
                 },
+
+                emailAvailable: async (fieldValue) => {
+                  const response = await fetch(
+                    `https://jsonplaceholder.typicode.com/users?email=${fieldValue}`
+                  );
+
+                  const data = await response.json();
+
+                  return data.length === 0 || "Email already exists";
+                },
               },
+              required: "Email is required",
             })}
           />
           <p className="error-Msg">{errors.email?.message}</p>
@@ -176,16 +207,22 @@ const YouTubeForm = () => {
             type="text"
             id="twitter"
             {...register("social.twitter", {
+              disabled: watch("channel") === "", // in this if it is disabled then the value is set to undefined and also required message does not pop-up
               required: "Twitter Link is required",
             })}
           />
           <p className="error-Msg">{errors.social?.twitter?.message}</p>
         </div>
-        <div>
-          <label>List of All phone numbers</label>
-          <div>
+        <div className="form-control">
+          <div className="form-label">
+            <label>List of All phone numbers</label>
+            <button type="button" onClick={() => append({ number: "" })}>
+              Add
+            </button>
+          </div>
+          <div className="form-group">
             {fields.map((field, index) => (
-              <div className="form-control" key={field.id}>
+              <div key={field.id} className="form-field">
                 <input
                   type="text"
                   {...register(`phNumbers.${index}.number` as const)}
@@ -197,9 +234,6 @@ const YouTubeForm = () => {
                 )}
               </div>
             ))}
-            <button type="button" onClick={() => append({ number: "" })}>
-              Add
-            </button>
           </div>
         </div>
 
@@ -234,13 +268,22 @@ const YouTubeForm = () => {
           />
           <p className="error-Msg">{errors.dob?.message}</p>
         </div>
-        <button>Submit</button>
-        <button type="button" onClick={handleGetValues}>
-          Get Values
-        </button>
-        <button type="button" onClick={handleSetValue}>
-          Set Values
-        </button>
+        <div className="form-btn">
+          <button>Submit</button>
+          {/* <button disabled={!isDirty || !isValid}>Submit</button> */}
+          <button type="button" onClick={handleGetValues}>
+            Get Values
+          </button>
+          <button type="button" onClick={handleSetValue}>
+            Set Values
+          </button>
+          <button type="button" onClick={() => reset()}>
+            Reset
+          </button>
+          <button type="button" onClick={() => trigger()}>
+            Validate
+          </button>
+        </div>
       </form>
       <DevTool control={control} />
     </div>
